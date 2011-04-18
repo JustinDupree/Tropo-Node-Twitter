@@ -122,7 +122,7 @@ app.post('/confirmation', function(req, res){
 	var the_choice = req.body['result']['actions']['value'];
 	
 	if (the_choice ==  "1") {
-		tropo.say("Thank you confirming.  Follow suggestion has been posted to our Twitter feed.");
+		tropo.say("Thank you for confirming.  Follow suggestion has been posted to our Twitter feed.");
 		
 		tropo.on("continue", null, "/twitter", true);
 		
@@ -134,13 +134,6 @@ app.post('/confirmation', function(req, res){
 		res.send(TropoJSON(tropo));
 	}
 
-});
-
-app.post('/timeout_badchoice', function(req, res){
-	var tropo = new TropoWebAPI();
-	tropo.say("Sorry, didn't get that.  Please try again.");
-
-	res.send(TropoJSON(tropo));
 });
 
 app.post('/twitter', function(req, res){
@@ -164,6 +157,13 @@ app.post('/twitter', function(req, res){
 	
 	res.send(req.session.name);
 
+});
+
+app.post('/timeout_badchoice', function(req, res){
+	var tropo = new TropoWebAPI();
+	tropo.say("Sorry, didn't get that.  Please try again.");
+
+	res.send(TropoJSON(tropo));
 });
 
 // This launches the app on port 8000.  This is modifiable.
